@@ -1,3 +1,5 @@
+# IMPORTANT: this is currently in progress (not working)
+
 # v_repExtLanelets
 A V-REP plugin to import lanelets as meshes
 
