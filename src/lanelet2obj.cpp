@@ -5,7 +5,7 @@
 #include <vector>
 #include <ctime>
 
-#include <triangulate.hpp>
+#include <triangulate.h>
 
 #include <MRT/libLanelet/llet_xml.hpp>
 #include <MRT/libLanelet/Lanelet.hpp>
