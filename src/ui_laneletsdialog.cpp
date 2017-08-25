@@ -26,8 +26,7 @@
 //
 // This file was automatically created for V-REP release V3.4.0 rev. 1 on April 5th 2017
 
-#include "laneletsdialog.h"
-#include "ui_colladadialog.h"
+#include "ui_laneletsdialog.h"
 #include "v_repLib.h"
 #include <boost/format.hpp>
 #include <vector>
@@ -1186,3 +1185,5 @@ int CColladaDialog::importSingleGroupedShape(const char* pathAndFile,bool preser
     }
     return(retVal);
 }
+
+

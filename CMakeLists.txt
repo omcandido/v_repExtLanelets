@@ -12,24 +12,25 @@ find_package(VREP REQUIRED)
 find_package(geodesy REQUIRED)
 find_package(Qt5Widgets)
 
-qt5_wrap_cpp(MyProjectLib_hdr_moc ${CMAKE_SOURCE_DIR}/include/laneletsdialog.h)
-qt5_wrap_ui (MyProjectLib_ui_moc ${PROJECT_SOURCE_DIR}/gui/laneletsdialog.ui)
+qt5_wrap_cpp(MyProjectLib_hdr_moc ${PROJECT_SOURCE_DIR}/include/ui_laneletsdialog.h)
+qt5_wrap_ui(MyProjectLib_ui_moc ${PROJECT_SOURCE_DIR}/gui/laneletsdialog.ui)
 
 include_directories(
   ${CMAKE_SOURCE_DIR}/include
+  ${VREP_ROOT}/programming/v_repMath
   lib/liblanelet/installs/include
   ${VREP_INCLUDE}
 )
 
 set (SOURCES
   src/lanelet2obj.cpp
-  src/laneletsdialog.cpp
+  src/ui_laneletsdialog.cpp
   src/triangulate.cpp
   src/v_repExtLanelets.cpp
 )
 
 set (HEADERS
-  include/laneletsdialog.h
+  include/ui_laneletsdialog.h
   include/triangulate.h
   include/v_repExtLanelets.h
 )

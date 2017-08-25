@@ -26,10 +26,10 @@
 //
 // This file was automatically created for V-REP release V3.4.0 rev. 1 on April 5th 2017
 
-#include "v_repExtCollada.h"
+#include "v_repExtLanelets.h"
 #include "v_repLib.h"
 #include <iostream>
-#include "colladadialog.h"
+#include "ui_laneletsdialog.h"
 
 #ifdef _WIN32
     #include <direct.h>

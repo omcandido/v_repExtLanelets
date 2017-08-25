@@ -30,8 +30,6 @@
 #define COLLADADIALOG_H
 
 #include <QDialog>
-#include "COLLADAImporter.h"
-#include "COLLADAExporter.h"
 
 struct SSimulationThreadCommand
 {
@@ -116,6 +114,12 @@ private slots:
     void on_qqExport_clicked();
 
     void on_qqImportUngroup_clicked();
+
+    void on_qqExportScalingFactor_selectionChanged();
+
+    void on_qqExport_released();
+
+    void on_qqImport_toggled(bool checked);
 
 private:
     Ui::CColladaDialog *ui;
