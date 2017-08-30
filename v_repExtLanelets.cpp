@@ -43,7 +43,7 @@
 #define PLUGIN_VERSION 6 // 6 since 25/7/2016 (multiple file import), 5 since 14/12/2015 (headless mode detect), 4 since 14/5/2015, 3 since 26/11/2014, 2 since 10/1/2014 (new lock)
 
 LIBRARY vrepLib;
-CColladaDialog* colladaDialog=NULL;
+laneletsdialog* colladaDialog=NULL;
 
 
 // This is the plugin start routine (called just once, just after the plugin was loaded):
@@ -106,7 +106,7 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
     // ******************************************
 
     QWidget* pMainWindow = (QWidget*)simGetMainWindow(1);
-    colladaDialog=new CColladaDialog(pMainWindow); // The plugin dialog
+    colladadialog=new laneletsdialog(pMainWindow); // The plugin dialog
     simAddModuleMenuEntry("",1,&colladaDialog->dialogMenuItemHandle);
     simSetModuleMenuItemState(colladaDialog->dialogMenuItemHandle,1,"COLLADA import/export...");
 
