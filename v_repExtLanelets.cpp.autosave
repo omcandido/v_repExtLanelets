@@ -107,7 +107,7 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
     // ******************************************
 
     QWidget* pMainWindow = (QWidget*)simGetMainWindow(1);
-    colladadialog=new laneletsdialog(pMainWindow); // The plugin dialog
+    colladadialog = new laneletsdialog(pMainWindow); // The plugin dialog
     simAddModuleMenuEntry("",1,&colladaDialog->dialogMenuItemHandle);
     simSetModuleMenuItemState(colladaDialog->dialogMenuItemHandle,1,"COLLADA import/export...");
 

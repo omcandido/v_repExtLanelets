@@ -10,8 +10,6 @@ CONFIG += c++11
 TARGET = v_repExtLanelets
 TEMPLATE = lib
 
-
-
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 *-msvc* {
