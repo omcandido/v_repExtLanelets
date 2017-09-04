@@ -44,8 +44,7 @@
 #define PLUGIN_VERSION 1
 
 LIBRARY vrepLib;
-laneletsdialog* colladaDialog=NULL;
-
+laneletsdialog* laneletsDialog=NULL;
 
 // This is the plugin start routine (called just once, just after the plugin was loaded):
 VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
@@ -88,9 +87,9 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
     // ******************************************
     int vrepVer;
     simGetIntegerParameter(sim_intparam_program_version,&vrepVer);
-    if (vrepVer<20604) // if V-REP version is smaller than 2.06.04
+    if (vrepVer<30200) // if V-REP version is smaller than 3.02.00
     {
-        std::cout << "Sorry, your V-REP copy is somewhat old. Cannot start 'Collada' plugin.\n";
+        std::cout << "Sorry, your V-REP copy is somewhat old. Cannot start 'Lanelets' plugin.\n";
         unloadVrepLibrary(vrepLib);
         return(0); // Means error, V-REP will unload this plugin
     }
@@ -100,16 +99,16 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
     // ******************************************
     if (simGetBooleanParameter(sim_boolparam_headless)>0)
     {
-        std::cout << "V-REP runs in headless mode. Cannot start 'Collada' plugin.\n";
+        std::cout << "V-REP runs in headless mode. Cannot start 'Lanelets' plugin.\n";
         unloadVrepLibrary(vrepLib);
         return(0); // Means error, V-REP will unload this plugin
     }
     // ******************************************
 
     QWidget* pMainWindow = (QWidget*)simGetMainWindow(1);
-    colladadialog=new laneletsdialog(pMainWindow); // The plugin dialog
-    simAddModuleMenuEntry("",1,&colladaDialog->dialogMenuItemHandle);
-    simSetModuleMenuItemState(colladaDialog->dialogMenuItemHandle,1,"COLLADA import/export...");
+    laneletsDialog = new laneletsdialog(pMainWindow); // The plugin dialog
+    simAddModuleMenuEntry("",1,&laneletsDialog->dialogMenuItemHandle);
+    simSetModuleMenuItemState(laneletsDialog->dialogMenuItemHandle,1,"Import lanelets...");
 
     return(PLUGIN_VERSION); // initialization went fine, we return the version number of this plugin (can be queried with simGetModuleName)
 }
