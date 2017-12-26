@@ -1,3 +1,6 @@
-file /home/candido/Desktop/git/v_repExtLanelets/liblanelet/SConstruct,line 125:
+file /home/candido/Git/v_repExtLanelets/liblanelet/SConstruct,line 125:
+	Configure(confdir = .sconf_temp)
+
+file /home/candido/Git/v_repExtLanelets/liblanelet/libpugixml/SConscript,line 3:
 	Configure(confdir = .sconf_temp)
 

@@ -21,7 +21,7 @@
 #include "LineStrip.hpp"
 #include "RegulatoryElement.hpp"
 
-#include <pugixml.hpp>
+#include <MRT/libpugixml/pugixml.hpp>
 #include <MRT/Commons/prettyprint.hpp>
 #include <MRT/Commons/mercator.hpp>
 
@@ -200,7 +200,10 @@ void XMLParser::parse_lanelets()
             bounds["right"] = std::make_shared< ReversedLineStrip >(bounds["right"]);
         }
 
-        assert( inrange(phi(),  0.5 * pi_2, 1.5 * pi_2 ) );
+//        assert( inrange(phi(),  0.5 * pi_2, 1.5 * pi_2 ) );
+
+        // IMPORTANT: I am removing the assert above in order to avoid
+        // problems when using the library with the v_repExtLanelets plugin
 
         auto new_lanelet = std::make_shared< Lanelet >(id, bounds["left"], bounds["right"]);
         new_lanelet->attributes() = tagwalker.attributes;

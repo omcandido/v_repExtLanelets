@@ -1,16 +1,25 @@
-#-------------------------------------------------
-#
-# Project created by QtCreator 2017-08-30T11:48:36
-#
-#-------------------------------------------------
+# v_repExtLanelets plugin
+# (c) Candido Otero, 2017, Universidade de Vigo
+#----------------------------------------------------------
 
-QT       += core gui
-CONFIG += c++11
 
 TARGET = v_repExtLanelets
 TEMPLATE = lib
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += core
+QT += gui
+
+CONFIG += c++11
+
+INCLUDEPATH += "../include"
+INCLUDEPATH += "../common"
+INCLUDEPATH += "../v_repMath"
+
+INCLUDEPATH += "dialog"
+INCLUDEPATH += "triangulate"
+INCLUDEPATH += "liblanelet/installs/include"
+
+greaterThan(QT_MAJOR_VERSION,4): QT += widgets
 
 *-msvc* {
     QMAKE_CXXFLAGS += -O2
@@ -36,28 +45,77 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
     QMAKE_CFLAGS += -Wno-unused-local-typedefs
 }
 
-INCLUDEPATH += "../include"
-INCLUDEPATH += "../common"
-INCLUDEPATH += "liblanelet/installs/include"
 
+win32 {
+    DEFINES += WIN_VREP
+}
+
+macx {
+    DEFINES += MAC_VREP
+}
+
+unix:!macx {
+    DEFINES += LIN_VREP
+}
 
 SOURCES += \
-    laneletsdialog.cpp \
-    lanelet2obj.cpp \
-    triangulate.cpp \
     v_repExtLanelets.cpp \
+    lanelet2obj.cpp \
+    dialog/laneletsdialog.cpp \
+    triangulate/triangulate.cpp \
+    liblanelet/libLanelet/LaneletMap.cpp \
+    liblanelet/libLanelet/LaneletBase.cpp \
+    liblanelet/libLanelet/Attribute.cpp \
+    liblanelet/libLanelet/LineStrip.cpp \
+    liblanelet/libLanelet/LLTree.cpp \
+    liblanelet/libLanelet/RegulatoryElement.cpp \
+    liblanelet/libLanelet/CompoundLanelet.cpp \
+    liblanelet/libLanelet/llet_xml.cpp \
+    liblanelet/libLanelet/Lanelet.cpp \
+    liblanelet/libpugixml/pugixml.cpp \
+    ../v_repMath/3Vector.cpp \
+    ../v_repMath/3X3Matrix.cpp \
+    ../v_repMath/4Vector.cpp \
+    ../v_repMath/4X4FullMatrix.cpp \
+    ../v_repMath/4X4Matrix.cpp \
+    ../v_repMath/7Vector.cpp \
+    ../v_repMath/MyMath.cpp \
+    ../common/v_repLib.cpp \
 
-HEADERS  += \
-    laneletsdialog.h \
-    triangulate.h \
+HEADERS +=\
     v_repExtLanelets.h \
+    lanelet2obj.hpp \
+    dialog/laneletsdialog.h \
+    triangulate/triangulate.h \
+    liblanelet/installs/include/MRT/Commons/convert_coordinates.hpp \
+    liblanelet/installs/include/MRT/Commons/LocalGeographicCS.hpp \
+    liblanelet/installs/include/MRT/Commons/mercator.hpp \
+    liblanelet/installs/include/MRT/Commons/normalize_angle.hpp \
+    liblanelet/installs/include/MRT/Commons/prettyprint.hpp \
+    liblanelet/installs/include/MRT/libLanelet/Attribute.hpp \
+    liblanelet/installs/include/MRT/libLanelet/LaneletFwd.hpp \
+    liblanelet/installs/include/MRT/libLanelet/lanelet_point.hpp \
+    liblanelet/installs/include/MRT/libLanelet/RegulatoryElement.hpp \
+    liblanelet/installs/include/MRT/libLanelet/BoundingBox.hpp \
+    liblanelet/installs/include/MRT/libLanelet/LaneletGraph.hpp \
+    liblanelet/installs/include/MRT/libLanelet/LineStrip.hpp \
+    liblanelet/installs/include/MRT/libLanelet/RTree.h \
+    liblanelet/installs/include/MRT/libLanelet/CompoundLanelet.hpp \
+    liblanelet/installs/include/MRT/libLanelet/Lanelet.hpp \
+    liblanelet/installs/include/MRT/libLanelet/llet_xml.hpp \
+    liblanelet/installs/include/MRT/libLanelet/LaneletBase.hpp \
+    liblanelet/installs/include/MRT/libLanelet/LaneletMap.hpp \
+    liblanelet/installs/include/MRT/libLanelet/LLTree.hpp \
+    liblanelet/installs/include/MRT/libpugixml/pugiconfig.hpp \
+    liblanelet/installs/include/MRT/libpugixml/pugixml.hpp \
+    ../v_repMath/3Vector.h \
+    ../v_repMath/3X3Matrix.h \
+    ../v_repMath/4Vector.h \
+    ../v_repMath/4X4FullMatrix.h \
+    ../v_repMath/4X4Matrix.h \
+    ../v_repMath/7Vector.h \
+    ../v_repMath/MyMath.h \
+    ../include/v_repLib.h \
 
-FORMS    += laneletsdialog.ui
-
-LIBS += -L$$PWD/liblanelet/installs/lib/MRT/ -lLanelet
-
-INCLUDEPATH += $$PWD/liblanelet/installs/include
-DEPENDPATH += $$PWD/liblanelet/installs/include
-
-CONFIG += link_pkgconfig
-PKGCONFIG += geodesy
+FORMS += \
+    dialog/laneletsdialog.ui

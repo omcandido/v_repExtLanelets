@@ -1,30 +1,7 @@
-// This file is part of the COLLADA PLUGIN for V-REP
-// 
-// Copyright 2006-2017 Coppelia Robotics GmbH. All rights reserved. 
-// marc@coppeliarobotics.com
-// www.coppeliarobotics.com
-// 
-// The COLLADA PLUGIN is licensed under the terms of GNU GPL:
-// 
-// -------------------------------------------------------------------
-// The COLLADA PLUGIN is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-// 
-// THE COLLADA PLUGIN IS DISTRIBUTED "AS IS", WITHOUT ANY EXPRESS OR IMPLIED
-// WARRANTY. THE USER WILL USE IT AT HIS/HER OWN RISK. THE ORIGINAL
-// AUTHORS AND COPPELIA ROBOTICS GMBH WILL NOT BE LIABLE FOR DATA LOSS,
-// DAMAGES, LOSS OF PROFITS OR ANY OTHER KIND OF LOSS WHILE USING OR
-// MISUSING THIS SOFTWARE.
-//  
-// See the GNU General Public License for more details.
-// 
-// You should have received a copy of the GNU General Public License
-// along with the COLLADA PLUGIN.  If not, see <http://www.gnu.org/licenses/>.
-// -------------------------------------------------------------------
-//
-// This file was automatically created for V-REP release V3.4.0 rev. 1 on April 5th 2017
+/* ----------------------------------------------------------
+ * v_repExtLanelets plugin
+ * (c) Candido Otero, 2017, Universidade de Vigo
+ * ----------------------------------------------------------*/
 
 #include "v_repExtLanelets.h"
 #include "v_repLib.h"
@@ -72,12 +49,12 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
     vrepLib=loadVrepLibrary(temp.c_str());
     if (vrepLib==NULL)
     {
-        std::cout << "Error, could not find or correctly load the V-REP library. Cannot start 'Collada' plugin.\n";
+        std::cout << "Error, could not find or correctly load the V-REP library. Cannot start 'Lanelets' plugin.\n";
         return(0); // Means error, V-REP will unload this plugin
     }
     if (getVrepProcAddresses(vrepLib)==0)
     {
-        std::cout << "Error, could not find all required functions in the V-REP library. Cannot start 'Collada' plugin.\n";
+        std::cout << "Error, could not find all required functions in the V-REP library. Cannot start 'Lanelets' plugin.\n";
         unloadVrepLibrary(vrepLib);
         return(0); // Means error, V-REP will unload this plugin
     }
@@ -108,7 +85,8 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
     QWidget* pMainWindow = (QWidget*)simGetMainWindow(1);
     laneletsDialog = new laneletsdialog(pMainWindow); // The plugin dialog
     simAddModuleMenuEntry("",1,&laneletsDialog->dialogMenuItemHandle);
-    simSetModuleMenuItemState(laneletsDialog->dialogMenuItemHandle,1,"Import lanelets...");
+    simSetModuleMenuItemState(laneletsDialog->dialogMenuItemHandle,1,"Lanelets import...");
+
 
     return(PLUGIN_VERSION); // initialization went fine, we return the version number of this plugin (can be queried with simGetModuleName)
 }
@@ -117,47 +95,33 @@ VREP_DLLEXPORT unsigned char v_repStart(void* reservedPointer,int reservedInt)
 VREP_DLLEXPORT void v_repEnd()
 {
     // Here you could handle various clean-up tasks
-    delete colladaDialog;
     unloadVrepLibrary(vrepLib); // release the library
 }
 
 // This is the plugin messaging routine (i.e. V-REP calls this function very often, with various messages):
 VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customData,int* replyData)
 { // This is called quite often. Just watch out for messages/events you want to handle
-    // Keep following 6 lines at the beginning and unchanged:
+    // Keep following 5 lines at the beginning and unchanged:
     static bool refreshDlgFlag=true;
     int errorModeSaved;
     simGetIntegerParameter(sim_intparam_error_report_mode,&errorModeSaved);
     simSetIntegerParameter(sim_intparam_error_report_mode,sim_api_errormessage_ignore);
     void* retVal=NULL;
 
-    // Here we can intercept many messages from V-REP (actually callbacks).
-    // For a complete list of messages that you can intercept/react with, search for "sim_message_eventcallback"-type constants
-    // in the V-REP user manual.
+    //---------------------------------- CALLBACKS ----------------------------------------
 
     if (message==sim_message_eventcallback_refreshdialogs)
         refreshDlgFlag=true; // V-REP dialogs were refreshed. Maybe a good idea to refresh this plugin's dialog too
 
     if (message==sim_message_eventcallback_menuitemselected)
     { // A custom menu bar entry was selected..
-        if (auxiliaryData[0]==colladaDialog->dialogMenuItemHandle)
-        {
-            colladaDialog->makeVisible(!colladaDialog->getVisible()); // Toggle visibility of the dialog
-        }
-    }
-
-    if (message==sim_message_eventcallback_colladaplugin)
-    {
-        if (auxiliaryData[0]==0)
-            replyData[0]=PLUGIN_VERSION; // this is the version number of this plugin
-        if (auxiliaryData[0]==1)
-            replyData[0]=colladaDialog->importSingleGroupedShape((const char*)customData,(auxiliaryData[1]&1)!=0,float(auxiliaryData[2])/1000.0f);
+        if (auxiliaryData[0]==laneletsDialog->dialogMenuItemHandle)
+            laneletsDialog->makeVisible(!laneletsDialog->getVisible()); // Toggle visibility of the dialog
     }
 
     if (message==sim_message_eventcallback_instancepass)
     { // It is important to always correctly react to events in V-REP. This message is the most convenient way to do so:
-        colladaDialog->handleCommands();
-        colladaDialog->setSimulationStopped(simGetSimulationState()==sim_simulation_stopped);
+        laneletsDialog->setSimulationStopped(simGetSimulationState()==sim_simulation_stopped);
 
         int flags=auxiliaryData[0];
         bool sceneContentChanged=((flags&(1+2+4+8+16+32+64+256))!=0); // object erased, created, model or scene loaded, und/redo called, instance switched, or object scaled since last sim_message_eventcallback_instancepass message
@@ -175,28 +139,11 @@ VREP_DLLEXPORT void* v_repMessage(int message,int* auxiliaryData,void* customDat
     }
     if ((message==sim_message_eventcallback_guipass)&&refreshDlgFlag)
     { // handle refresh of the plugin's dialog:
-        colladaDialog->refresh(); // Refresh the dialog
+        laneletsDialog->refresh(); // Refresh the dialog
         refreshDlgFlag=false;
     }
 
-    if (message==sim_message_eventcallback_simulationabouttostart)
-    {
-        colladaDialog->simulationAboutToStart();
-    }
-    if (message==sim_message_eventcallback_mainscriptabouttobecalled)
-    {
-        colladaDialog->mainScriptAboutToBeCalled();
-    }
-    if (message==sim_message_eventcallback_beforerendering)
-    { // we are still in the main SIM thread!
-        colladaDialog->renderingPassAboutToBeCalled();
-    }
-    if (message==sim_message_eventcallback_simulationended)
-    {
-        colladaDialog->simulationEnded();
-    }
-
-    // You can add many more messages to handle here
+    //-------------------------------- END CALLBACKS --------------------------------------
 
     // Keep following unchanged:
     simSetIntegerParameter(sim_intparam_error_report_mode,errorModeSaved); // restore previous settings

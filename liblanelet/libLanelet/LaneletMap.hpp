@@ -35,7 +35,6 @@ struct NoPath
 class LaneletMap
 {
 public:
-	 LaneletMap( ) {};
     LaneletMap( std::vector< lanelet_ptr_t > lanelets );
     LaneletMap( std::string filename );
 
@@ -45,9 +44,6 @@ public:
     const lanelet_ptr_t& lanelet_by_id( int32_t id ) const;
 
     const Graph& graph() const;
-
-    std::vector< lanelet_ptr_t > get_lanelet_list() { return _lanelets;};
-    std::vector< lanelet_ptr_t > lanelets() { return _lanelets;};
 
 private:
     void init();
