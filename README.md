@@ -9,7 +9,7 @@ No dependencies should be necesary to compile the plugin, other than V-REP's lib
 To solve these dependencies, clone the plugin in the V-REP/programming folder, along with the other plugins
 (this is because it needs the "common", "include", etc V-REP folders).
 
-If you find any problem, please let me know.
+If you find any problems, please let me know.
 
 ## INSTRUCTIONS
 - Compile the plugin (there is a compiled plugin for Linux x64 under the "compiled_plugin" folder)
@@ -55,3 +55,13 @@ C. Otero, E. Paz, R. Sanz y J. López , R. Barea, E. Romera, E. Molinos, R. Arro
 	* https://www.youtube.com/user/RobeSafe
 	* https://www.youtube.com/channel/UC7jt8T4QEy3RLMCZEwME8SA/videos
 
+### TODO:
+- [ ] Add regulatory elements.
+- [ ] Add textures
+- [ ] Possibility of directly adding buildings using an exported map from Open Street Map
+- [ ] Smooth lanelets
+- [ ] Improve triangulation
+- [ ] Fix assert exception (llet_xml.cpp, line 203)
+- ...
+
+NOTE: this project was meant to be taken on by students as a Bs. Project, but there has been a lack of volunteers. Feel free to improve this code.
