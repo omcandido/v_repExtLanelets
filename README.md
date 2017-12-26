@@ -11,7 +11,7 @@ To solve these dependencies, clone the plugin in the V-REP/programming folder, a
 
 If you find any problem, please let me know.
 
-# INSTRUCTIONS
+## INSTRUCTIONS
 - Compile the plugin (there is a compiled plugin for Linux x64 under the "compiled_plugin" folder)
 - Run V-REP
 - Plugins >> Lanelets import...
@@ -39,7 +39,7 @@ If you find any problem, please let me know.
   you probably need to zoom out. To do so, you can select the shape in the tree window
   and click 'Fit to view' (5th button starting from the left on the V-REP top toolbar).
 
-# CITATION & MORE INFO
+## CITATION & MORE INFO
 The creation of this plugin has been motivated by the "Smart Elderly Car Project" (collaboration 
 between the Uvigo and UAH), in which an autonomous urban car is simulated in V-REP.
 
