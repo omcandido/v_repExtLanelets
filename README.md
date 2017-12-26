@@ -39,7 +39,7 @@ If you find any problem, please let me know.
   you probably need to zoom out. To do so, you can select the shape in the tree window
   and click 'Fit to view' (5th button starting from the left on the V-REP top toolbar).
 
-#CITATION & MORE INFO
+# CITATION & MORE INFO
 The creation of this plugin has been motivated by the "Smart Elderly Car Project" (collaboration 
 between the Uvigo and UAH), in which an autonomous urban car is simulated in V-REP.
 
@@ -52,6 +52,6 @@ C. Otero, E. Paz, R. Sanz y J. López , R. Barea, E. Romera, E. Molinos, R. Arro
 - Project's website: https://www.robesafe.uah.es/index.php/en/smartelderlycar
 
 - Youtube demos:
-	· https://www.youtube.com/user/RobeSafe
-	· https://www.youtube.com/channel/UC7jt8T4QEy3RLMCZEwME8SA/videos
+	* https://www.youtube.com/user/RobeSafe
+	* https://www.youtube.com/channel/UC7jt8T4QEy3RLMCZEwME8SA/videos
 
