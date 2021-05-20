@@ -1,5 +1,11 @@
 # v_repExtLanelets
 
+## Citation
+
+J. López, C. Otero, R. Sanz, E. Paz, E. Molinos and R. Barea, "A new approach to local navigation for autonomous driving vehicles based on the curvature velocity method," 2019 International Conference on Robotics and Automation (ICRA), 2019, pp. 1751-1757, doi: 10.1109/ICRA.2019.8794380.
+
+___
+
 A V-REP plugin to import lanelets as meshes
 
 The liblanelet library is used from source instead of binaries,
@@ -39,14 +45,12 @@ If you find any problems, please let me know.
   you probably need to zoom out. To do so, you can select the shape in the tree window
   and click 'Fit to view' (5th button starting from the left on the V-REP top toolbar).
 
-## CITATION & MORE INFO
+## MORE INFO
 The creation of this plugin has been motivated by the "Smart Elderly Car Project" (collaboration 
 between the Uvigo and UAH), in which an autonomous urban car is simulated in V-REP.
 
-- More info about the simulation process can be found in the paper "Simulación de 
-vehículos autónomos usando V-REP bajo ROS": 
+J. López, C. Otero, R. Sanz, E. Paz, E. Molinos and R. Barea, "A new approach to local navigation for autonomous driving vehicles based on the curvature velocity method," 2019 International Conference on Robotics and Automation (ICRA), 2019, pp. 1751-1757, doi: 10.1109/ICRA.2019.8794380.
 
-https://www.researchgate.net/publication/319653412_Simulacion_de_vehiculos_autonomos_usando_V-REP_bajo_ROS
 C. Otero, E. Paz, R. Sanz y J. López , R. Barea, E. Romera, E. Molinos, R. Arroyo, L.M. Bergasa, E. López , “ SIMULACIÓN DE VEHÍCULOS AUTÓNOMOS USANDO V - REP BAJO ROS ”,  Accepted for publication in the conference JA2017 (XXXVIII  Jornadas  de Automática), Gijón , Spain, September, 6th - 8th 2017.
 
 - Project's website: https://www.robesafe.uah.es/index.php/en/smartelderlycar
